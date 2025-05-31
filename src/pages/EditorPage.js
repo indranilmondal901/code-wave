@@ -61,6 +61,20 @@ const EditorPage = () => {
     };
   }, []);
 
+  const handleCopyRoomId = () => {
+    try {
+      navigator.clipboard.writeText(roomId);
+      toast.success("Room ID copied to clipboard!");      
+    } catch (error) {
+      toast.error("Failed to copy Room ID!");
+      // console.error("Error copying Room ID:", error);      
+    }
+  };
+
+  const leaveRoom = () => {
+    reactNavigate("/");
+  };
+
   if (shouldRedirectHome) {
     <Navigate to="/" replace={true} />
   }
@@ -79,12 +93,12 @@ const EditorPage = () => {
             ))}
           </div>
         </div>
-        <button className='btn copyBtn'>Copy Room ID</button>
-        <button className='btn leaveBtn'>Leave Room</button>
+        <button className='btn copyBtn' onClick={handleCopyRoomId}>Copy Room ID</button>
+        <button className='btn leaveBtn' onClick={leaveRoom}>Leave Room</button>
       </div>
 
       <div className='editorWrapper'>
-        <Editor setClient={setClient} />
+        <Editor socketRef={socketRef} roomId={roomId}/>
       </div>
 
     </div>

@@ -38,7 +38,12 @@ io.on('connection', (socket) => {
                 socketId: socket.id,
             });
         });
-    })
+    });
+
+    socket.on(Actions.CODE_CHANGE, ({ code, roomId }) => {
+        // console.log('Server Code change received:', code);
+        socket.in(roomId).emit(Actions.CODE_CHANGE, {code});
+    });
 
 
     socket.on('disconnecting', () => {
