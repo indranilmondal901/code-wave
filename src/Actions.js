@@ -1,4 +1,4 @@
-const Action ={
+const Actions ={
     JOIN: 'join',
     JOINED: 'joined',
     DISCONNECTED: 'disconnected',
@@ -7,4 +7,4 @@ const Action ={
     LEAVE: 'leave',
 };
 
-module.exports = Action;
+module.exports = Actions;
