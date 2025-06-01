@@ -1,4 +1,4 @@
-import React, { useState,useEffect,useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Navigate, useLocation, useNavigate, useParams } from 'react-router-dom';
 import Client from '../components/Client';
 import Editor from '../components/Editor';
@@ -8,11 +8,13 @@ import toast from 'react-hot-toast';
 
 const EditorPage = () => {
   const socketRef = useRef(null);//useRef beacuse it wil not rerender component on changing value,Component re-rendering will not change the socket connection
-  const [clients, setClient] = useState([]);
+  const codeRef = useRef(null); // to store the current code in the editor
 
+  const { roomId } = useParams();
   const location = useLocation();
   const reactNavigate = useNavigate();
-  const { roomId } = useParams();
+
+  const [clients, setClient] = useState([]);
 
   // redirect conditions
   const shouldRedirectHome = !roomId || !location.state;
@@ -41,6 +43,12 @@ const EditorPage = () => {
           // console.log(`${userName} Joined the room successfully!`)
         }
         setClient(clients);
+
+        // code syncing
+        socketRef.current.emit(Actions.CODE_SYNC, {
+          code: codeRef.current,
+          socketId: socketId,
+        });
       });
 
       // Listen for 'disconnected' event
@@ -51,20 +59,21 @@ const EditorPage = () => {
 
     };
     initSocketConnection();
+
     // Cleanup on component unmount
     return () => {
-      if (socketRef.current) {
-        socketRef.current.disconnect();
-        socketRef.current.off(Actions.JOINED);
-        socketRef.current.off(Actions.DISCONNECTED);
-      }
+      // if (socketRef.current) {
+      socketRef.current.disconnect();
+      socketRef.current.off(Actions.JOINED);
+      socketRef.current.off(Actions.DISCONNECTED);
+      // }
     };
   }, []);
 
   const handleCopyRoomId = () => {
     try {
       navigator.clipboard.writeText(roomId);
-      toast.success("Room ID copied to clipboard!");      
+      toast.success("Room ID copied to clipboard!");
     } catch (error) {
       toast.error("Failed to copy Room ID!");
       // console.error("Error copying Room ID:", error);      
@@ -78,7 +87,7 @@ const EditorPage = () => {
   if (shouldRedirectHome) {
     <Navigate to="/" replace={true} />
   }
-
+  console.log(codeRef.current);
   return (
     <div className='mainWrap'>
       <div className='aside'>
@@ -98,7 +107,13 @@ const EditorPage = () => {
       </div>
 
       <div className='editorWrapper'>
-        <Editor socketRef={socketRef} roomId={roomId}/>
+        <Editor socketRef={socketRef} roomId={roomId}
+          onCodeChange={(code) => {
+            console.log("inside onCodeChange", code);
+            codeRef.current = code;
+            console.log("updated codeRef.current:", codeRef.current);
+          }}
+        />
       </div>
 
     </div>

@@ -9,7 +9,7 @@ import Actions from '../Actions';
 
 
 
-const Editor = ({ socketRef, roomId }) => {
+const Editor = ({ socketRef, roomId, onCodeChange }) => {
   const editorRef = useRef(null);
 
   useEffect(() => {
@@ -21,12 +21,14 @@ const Editor = ({ socketRef, roomId }) => {
         autoCloseTags: true,
         lineNumbers: true,
       });
+
+      //code change event listener
       editorRef.current.on('change', (instance, changeObj) => {
         // Handle changes in the editor
         // console.log('Editor content changed:', instance.getValue(),changeObj);
         const { origin } = changeObj;
         const code = instance.getValue();
-        // console.log('Code:', code);
+        onCodeChange(code); // Call the onCodeChange prop with the new code
 
         if (origin !== 'setValue') {
           // Emit the change to the server or handle it as needed
@@ -47,7 +49,7 @@ const Editor = ({ socketRef, roomId }) => {
     // Listen for code changes from the server
     socketRef.current.on(Actions.CODE_CHANGE, ({ code }) => {
       console.log('Code received from server:', code);
-      if (editorRef.current.getValue() !== code && code !== null) {
+      if (/*editorRef.current.getValue() !== code &&*/ code !== null) {
         editorRef.current.setValue(code);
       }
     });

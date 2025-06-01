@@ -22,14 +22,12 @@ function getAllConnectedClients(roomId) {
 }
 
 io.on('connection', (socket) => {
-    console.log('A user connected:', socket.id);
-
     socket.on(Actions.JOIN, ({ roomId, userName }) => {
         userSocketMap.set(socket.id, userName);
         socket.join(roomId);
         //all clients in the room
         const clients = getAllConnectedClients(roomId);
-        console.log({ clients });
+        // console.log({ clients });
         //notify all clients in the room
         clients.forEach(({ socketId }) => {
             io.to(socketId).emit(Actions.JOINED, {
@@ -45,8 +43,14 @@ io.on('connection', (socket) => {
         socket.in(roomId).emit(Actions.CODE_CHANGE, {code});
     });
 
+    socket.on(Actions.CODE_SYNC, ({ socketId, code }) => {
+        // console.log('Syncing code to:', socketId);
+        io.to(socketId).emit(Actions.CODE_CHANGE, { code });
+    });
+
 
     socket.on('disconnecting', () => {
+        // console.log('User is disconnecting:', socket.id);
         const rooms = Array.from(socket.rooms);
         rooms.forEach((roomId) => {
             socket.in(roomId).emit(Actions.DISCONNECTED, {
@@ -59,8 +63,6 @@ io.on('connection', (socket) => {
     });
 
 });
-
-
 
 
 server.listen(port, () => {
