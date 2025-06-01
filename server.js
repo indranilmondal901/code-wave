@@ -6,6 +6,7 @@ const { Server } = require('socket.io');
 const Actions = require('./src/Actions');
 const server = http.createServer(app);
 const io = new Server(server);
+const path = require('path');
 
 app.use(express.static('build'));
 app.use((req, res, next) => {
