@@ -7,6 +7,12 @@ const Actions = require('./src/Actions');
 const server = http.createServer(app);
 const io = new Server(server);
 
+app.use(express.static('build'));
+app.use((req, res, next) => {
+    res.sendFile(path.JOIN(__dirname + '/build/index.html'));
+    next();
+});
+
 //user-socket mapping
 const userSocketMap = new Map();
 function getAllConnectedClients(roomId) {
