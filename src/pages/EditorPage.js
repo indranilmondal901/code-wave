@@ -62,11 +62,11 @@ const EditorPage = () => {
 
     // Cleanup on component unmount
     return () => {
-      // if (socketRef.current) {
-      socketRef.current.disconnect();
-      socketRef.current.off(Actions.JOINED);
-      socketRef.current.off(Actions.DISCONNECTED);
-      // }
+      if (socketRef.current) {
+        socketRef.current.disconnect();
+        socketRef.current.off(Actions.JOINED);
+        socketRef.current.off(Actions.DISCONNECTED);
+      }
     };
   }, []);
 
@@ -81,13 +81,14 @@ const EditorPage = () => {
   };
 
   const leaveRoom = () => {
-    reactNavigate("/");
+    const confirmLeave = window.confirm("Are you sure you want to leave the room?");
+    if (confirmLeave) reactNavigate("/");
   };
 
   if (shouldRedirectHome) {
-    <Navigate to="/" replace={true} />
+    return <Navigate to="/" replace={true} />
   }
-  console.log(codeRef.current);
+
   return (
     <div className='mainWrap'>
       <div className='aside'>

@@ -44,11 +44,10 @@ const Editor = ({ socketRef, roomId, onCodeChange }) => {
   }, []);
 
   useEffect(() => {
-    if (!socketRef.current) return;
+    if (!socketRef?.current) return;
 
     // Listen for code changes from the server
     socketRef.current.on(Actions.CODE_CHANGE, ({ code }) => {
-      console.log('Code received from server:', code);
       if (/*editorRef.current.getValue() !== code &&*/ code !== null) {
         editorRef.current.setValue(code);
       }
