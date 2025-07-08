@@ -2,18 +2,21 @@ const express = require('express');
 const app = express();
 const http = require('http');
 require('dotenv').config();
-const port = process.env.PORT || 10000;
+const port = process.env.PORT || 5000;
 const { Server } = require('socket.io');
 const Actions = require('./src/Actions');
 const server = http.createServer(app);
 const io = new Server(server);
 const path = require('path');
 
+//Only for production
+if (process.env.mode === 'prod') {
 app.use(express.static('build'));
 app.use((req, res, next) => {
     res.sendFile(path.join(__dirname, 'build', 'index.html'));
     // next();
 });
+}
 
 //user-socket mapping
 const userSocketMap = new Map();

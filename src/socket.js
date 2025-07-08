@@ -9,5 +9,5 @@ export const initSocket = async () => {
         // reconnectionDelay: 1000,
         transports: ['websocket'],
     };
-    return io(process.env.REACT_APP_SERVER_URL || 'http://localhost:5000', options);
+    return io(process.env.REACT_APP_SERVER_URL, options);
 };
