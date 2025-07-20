@@ -115,7 +115,7 @@ This project has been manually tested for:
 
 **Indranil Mondal**
 🎓 MCA, Manipal University Jaipur
-📧 \[[indranil.mondal901@gmail.com](mailto:indranil.mondal@example.com)] *(Replace with actual email)*
+📧 \[[indranilmondal901@gmail.com](mailto:indranil.mondal@example.com)] *(Replace with actual email)*
 🔗 GitHub: [github.com/indranilmondal901](https://github.com/indranilmondal901)
 
 ---
