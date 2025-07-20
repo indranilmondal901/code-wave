@@ -1,70 +1,130 @@
-# Getting Started with Create React App
+# 🚀 Code-Wave: A Real-Time Collaborative Code Editor
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**Code-Wave** is a real-time collaborative code editor that enables multiple users to write and edit code simultaneously in a shared environment. Built with **React**, **CodeMirror**, **Node.js**, and **Socket.IO**, this tool is perfect for pair programming, collaborative learning, and conducting live coding interviews — all in the browser.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 🌐 Live Demo
 
-### `npm start`
+- 🔗 **Deployed App:** [https://code-wave-7qco.onrender.com/](https://code-wave-7qco.onrender.com/)
+- 🎥 **Video Demo:** [Watch Demo on Loom](https://www.loom.com/share/4251b56663314d85afe49eb5a923834e?sid=f1e9ce90-f5e6-419f-b414-2f61a8768841)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## ✨ Features
 
-### `npm test`
+- 🧑‍💻 Real-time collaborative editing using WebSockets
+- 🖋️ Lightweight and responsive UI with CodeMirror editor
+- 🧠 Unique Room ID based session management
+- 🔌 Fast synchronization using Socket.IO
+- 📱 Mobile-friendly layout (read-only on smaller devices)
+- 🧼 Clean and minimal frontend design
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## 🛠️ Tech Stack
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+| Layer        | Tech                     |
+|--------------|--------------------------|
+| Frontend     | React, CodeMirror        |
+| Backend      | Node.js, Express         |
+| Real-Time    | Socket.IO                |
+| Hosting      | Render.com               |
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 📁 Project Structure
 
-### `npm run eject`
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+/code-wave
+├── client/               # React Frontend
+│   ├── public/
+│   └── src/
+│       ├── components/   # UI Components
+│       │   ├── Client.js
+│       │   └── Editor.js
+│       ├── pages/        # Page Layouts
+│       │   ├── Home.js
+│       │   └── EditorPage.js
+│       ├── App.js
+│       └── index.js
+├── server.js             # Express + Socket.IO server
+├── package.json
+└── README.md
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+````
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+---
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## 🚀 Getting Started
 
-## Learn More
+### 1. Clone the Repository
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```bash
+git clone https://github.com/indranilmondal901/code-wave.git
+cd code-wave
+````
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### 2. Install Dependencies
 
-### Code Splitting
+```bash
+# Install server dependencies
+npm install
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+# Install client dependencies
+cd client
+npm install
+```
 
-### Analyzing the Bundle Size
+### 3. Run the App Locally
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```bash
+# Start backend (from root)
+node server.js
 
-### Making a Progressive Web App
+# Start frontend (in a new terminal)
+cd client
+npm start
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+---
 
-### Advanced Configuration
+## 🧪 Testing
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+This project has been manually tested for:
 
-### Deployment
+* Socket connectivity across browser tabs
+* Room creation, joining, and disconnection events
+* Real-time text synchronization
+* Basic mobile view compatibility
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+---
 
-### `npm run build` fails to minify
+## 🔮 Future Scope
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+* 🌍 Add support for multiple programming languages
+* 💾 Persistent storage using a database (e.g., MongoDB)
+* 🗣️ Voice/video calling integration (WebRTC)
+* ⚙️ Code execution support using Judge0 API or custom compiler backend
+* 🧑‍🏫 Admin panel for classroom collaboration
+
+---
+
+## 👨‍💻 Developed By
+
+**Indranil Mondal**
+🎓 MCA, Manipal University Jaipur
+📧 \[[indranil.mondal@example.com](mailto:indranil.mondal@example.com)] *(Replace with actual email)*
+🔗 GitHub: [github.com/indranilmondal901](https://github.com/indranilmondal901)
+
+---
+
+> 📢 This project was developed as part of an academic submission. Feel free to fork and enhance it for learning or development purposes!
+
+```
+
+---
+
+Let me know if you'd like a downloadable file of this or need a GitHub repository setup with it.
+```
